@@ -28,7 +28,16 @@ public class Round {
         return participants.size() + 1;
     }
 
-    public BigInteger[] divideAndRemainder() {
-        return amount.divideAndRemainder(BigInteger.valueOf(this.getN()));
+    public BigInteger divide() {
+        return amount.divide(BigInteger.valueOf(this.getN()));
+    }
+
+    public List<Payment> getPayments() {
+        List<Payment> payments = new ArrayList<>();
+        BigInteger amount = divide();
+        for (Person participant : participants) {
+            payments.add(new Payment(participant, payer, amount, this));
+        }
+        return payments;
     }
 }
