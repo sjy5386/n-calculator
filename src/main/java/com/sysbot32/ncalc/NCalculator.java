@@ -3,6 +3,7 @@ package com.sysbot32.ncalc;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,5 +16,25 @@ public class NCalculator {
     public NCalculator() {
         this.people = new ArrayList<>();
         this.rounds = new ArrayList<>();
+    }
+
+    public List<Payment> calculate() {
+        List<Payment> payments = new ArrayList<>();
+        for (int i = 0; i < people.size(); i++) {
+            Person payer = people.get(i);
+            for (int j = i + 1; j < people.size(); j++) {
+                Person payee = people.get(j);
+                payments.add(new Payment(payer, payee, BigInteger.ZERO));
+            }
+        }
+        for (Round round : rounds) {
+            List<Payment> roundPayments = round.getPayments();
+            for (Payment payment : payments) {
+                for (Payment roundPayment : roundPayments) {
+                    payment.merge(roundPayment);
+                }
+            }
+        }
+        return payments;
     }
 }
