@@ -13,5 +13,4 @@ public class Payment {
     private Person payer;
     private Person payee;
     private BigInteger amount;
-    private Round round;
 }

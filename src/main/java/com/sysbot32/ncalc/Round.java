@@ -36,7 +36,7 @@ public class Round {
         List<Payment> payments = new ArrayList<>();
         BigInteger amount = divide();
         for (Person participant : participants) {
-            payments.add(new Payment(participant, payer, amount, this));
+            payments.add(new RoundPayment(participant, payer, amount, this));
         }
         return payments;
     }
