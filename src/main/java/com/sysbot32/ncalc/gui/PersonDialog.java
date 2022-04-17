@@ -12,7 +12,6 @@ public class PersonDialog extends JDialog {
     private final JList<Person> list;
     private final JTextField textField;
     private final JButton addButton;
-    private final JButton removeButton;
 
     public PersonDialog(JFrame owner) {
         super(owner);
@@ -24,12 +23,19 @@ public class PersonDialog extends JDialog {
         JPanel contentPane = (JPanel) this.getContentPane();
 
         list = new JList<>();
+        JPopupMenu componentPopupMenu = new JPopupMenu();
+        JMenuItem removeMenuItem = new JMenuItem("제거");
         JScrollPane scrollPane = new JScrollPane(list);
-        textField = new JTextField(16);
+        textField = new JTextField(23);
         addButton = new JButton("추가");
-        removeButton = new JButton("제거");
 
         list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
+        removeMenuItem.addActionListener(e -> {
+            Main.nCalculator.getPeople().removeAll(list.getSelectedValuesList());
+            list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
+        });
+        componentPopupMenu.add(removeMenuItem);
+        list.setComponentPopupMenu(componentPopupMenu);
         scrollPane.setPreferredSize(new Dimension(320, 180));
         textField.addActionListener(e -> addButton.doClick());
         addButton.addActionListener(e -> {
@@ -37,14 +43,9 @@ public class PersonDialog extends JDialog {
             list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
             textField.setText("");
         });
-        removeButton.addActionListener(e -> {
-            Main.nCalculator.getPeople().remove(list.getSelectedValue());
-            list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
-        });
 
         contentPane.add(scrollPane);
         contentPane.add(textField);
         contentPane.add(addButton);
-        contentPane.add(removeButton);
     }
 }
