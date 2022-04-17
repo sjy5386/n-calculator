@@ -23,4 +23,12 @@ public class Round {
         this.payer = payer;
         this.participants = new ArrayList<>();
     }
+
+    public int getN() {
+        return participants.size() + 1;
+    }
+
+    public BigInteger[] divideAndRemainder() {
+        return amount.divideAndRemainder(BigInteger.valueOf(this.getN()));
+    }
 }
