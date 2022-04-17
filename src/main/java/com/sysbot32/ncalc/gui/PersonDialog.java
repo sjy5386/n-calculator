@@ -24,13 +24,23 @@ public class PersonDialog extends JDialog {
         JPanel contentPane = (JPanel) this.getContentPane();
 
         list = new JList<>();
-        list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setPreferredSize(new Dimension(320, 180));
-
         textField = new JTextField(16);
         addButton = new JButton("추가");
         removeButton = new JButton("제거");
+
+        list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
+        scrollPane.setPreferredSize(new Dimension(320, 180));
+        textField.addActionListener(e -> addButton.doClick());
+        addButton.addActionListener(e -> {
+            Main.nCalculator.getPeople().add(new Person(textField.getText()));
+            list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
+            textField.setText("");
+        });
+        removeButton.addActionListener(e -> {
+            Main.nCalculator.getPeople().remove(list.getSelectedValue());
+            list.setListData(Main.nCalculator.getPeople().toArray(new Person[0]));
+        });
 
         contentPane.add(scrollPane);
         contentPane.add(textField);
