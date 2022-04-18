@@ -6,6 +6,7 @@ import lombok.ToString;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @ToString
@@ -35,6 +36,6 @@ public class NCalculator {
                 }
             }
         }
-        return payments;
+        return payments.stream().filter(e -> e.getAmount().compareTo(BigInteger.ZERO) > 0).collect(Collectors.toList());
     }
 }
