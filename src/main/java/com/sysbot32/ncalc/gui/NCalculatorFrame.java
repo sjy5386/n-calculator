@@ -12,8 +12,6 @@ public class NCalculatorFrame extends JFrame {
     private final JList<Payment> paymentList;
     private final JButton calculateButton;
 
-    private final PersonDialog personDialog;
-
     public NCalculatorFrame() {
         super("N Calculator");
         setSize(480, 720);
@@ -26,12 +24,14 @@ public class NCalculatorFrame extends JFrame {
         paymentList = new JList<>();
         JScrollPane scrollPane = new JScrollPane(paymentList);
         calculateButton = new JButton("계산하기");
-        personDialog = new PersonDialog(this);
 
         JMenu calculatorMenu = new JMenu("계산기");
         JMenuItem personMenuItem = new JMenuItem("인원");
-        personMenuItem.addActionListener(e -> personDialog.setVisible(true));
+        JMenuItem roundMenuItem = new JMenuItem("차례");
+        personMenuItem.addActionListener(e -> new PersonDialog(this).setVisible(true));
+        roundMenuItem.addActionListener(e -> new RoundDialog(this).setVisible(true));
         calculatorMenu.add(personMenuItem);
+        calculatorMenu.add(roundMenuItem);
         menuBar.add(calculatorMenu);
         paymentList.setListData(Main.nCalculator.calculate().toArray(new Payment[0]));
 

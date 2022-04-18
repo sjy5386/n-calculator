@@ -1,5 +1,6 @@
 package com.sysbot32.ncalc;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
