@@ -33,7 +33,9 @@ public class NCalculatorFrame extends JFrame {
         calculatorMenu.add(personMenuItem);
         calculatorMenu.add(roundMenuItem);
         menuBar.add(calculatorMenu);
-        paymentList.setListData(Main.nCalculator.calculate().toArray(new Payment[0]));
+        calculateButton.addActionListener(e -> {
+            paymentList.setListData(Main.nCalculator.calculate().toArray(new Payment[0]));
+        });
 
         setJMenuBar(menuBar);
         contentPane.add(scrollPane, BorderLayout.CENTER);
